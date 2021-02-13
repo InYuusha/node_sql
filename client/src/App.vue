@@ -1,8 +1,17 @@
 <template>
   <v-app>
-    <v-row align="center" justify="center">
+  
+      <v-row align="center" justify="center">
+
+   
+
       <v-col class="mx-7">
-            <h1>Posts</h1>
+            <h1 v-if="getPosts.length!=0" >Posts</h1>
+
+               <v-card v-if="getPosts.length==0" style="width:50%" >
+        <v-card-title>No Todo</v-card-title>
+        <v-card-subtitle>No Todo found , Add a Todo</v-card-subtitle>
+      </v-card>
 
     <v-card v-for="(post,key) in getPosts" :key="key" style="width:50%" >
 
@@ -17,11 +26,12 @@
 
       </v-col>
     </v-row>
-    <v-dialog v-model="dialog">
+
+    <v-dialog v-model="dialog" width="50%">
       <v-card>
         <v-sheet><v-card-title>New Todo</v-card-title></v-sheet>
         <v-form class="mx-4">
-                <v-text-field placeholder="Title" v-model="title" ></v-text-field>
+                <v-text-field placeholder="Todo" v-model="title" ></v-text-field>
            <v-text-field placeholder="Description" v-model="description" ></v-text-field>
            <v-card-actions>
                <v-btn  class="secondary" dark @click="addTodo()">Add</v-btn>
@@ -35,8 +45,10 @@
    
     </v-dialog>
 
-    <v-btn fab absolute left @click="dialog=true"><v-icon>mdi-plus</v-icon></v-btn>
+    
 
+ 
+   <v-btn fab absolute left @click="dialog=true"><v-icon>mdi-plus</v-icon></v-btn>
   </v-app>
 </template>
 
